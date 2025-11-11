@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>RANK SHOP — Glacier Network</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Great+Vibes&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #071225;
+      --accent: #39d0ff;
+      --accent-2: #6ec3ff;
+      --muted: #9fb4c8;
+      --text: #e6f6ff;
+      --shadow: 0 10px 30px rgba(2,10,20,0.6);
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: linear-gradient(180deg, #051023 0%, #072033 70%);
+      color: var(--text);
+      overflow-x:hidden;
+      line-height: 1.5;
+    }
+
+    /* snowfall effect */
+    canvas#snow {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    header {
+      position: relative;
+      text-align: center;
+      padding: 60px 20px 30px;
+      z-index: 2;
+    }
+    header h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 48px;
+      letter-spacing: 3px;
+      font-weight: 800;
+      color: var(--accent);
+      text-shadow: 0 0 15px rgba(57,208,255,0.6), 0 0 30px rgba(57,208,255,0.3);
+    }
+    header h2 {
+      font-family: 'Great Vibes', cursive;
+      font-size: 32px;
+      color: var(--accent-2);
+      text-shadow: 0 0 12px rgba(110,195,255,0.5), 0 0 25px rgba(110,195,255,0.2);
+      animation: glow 3s ease-in-out infinite alternate;
+      margin-top: 6px;
+    }
+
+    @keyframes glow {
+      from { text-shadow: 0 0 8px rgba(110,195,255,0.3); }
+      to { text-shadow: 0 0 20px rgba(110,195,255,0.8), 0 0 30px rgba(110,195,255,0.6); }
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 20px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .rank-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.04);
+      border-radius: 12px;
+      padding: 18px 20px;
+      margin-bottom: 14px;
+      transition: all 0.2s ease;
+      box-shadow: var(--shadow);
+    }
+    .rank-item:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 15px 40px rgba(57,208,255,0.15);
+    }
+    .rank-title {
+      font-size: 18px;
+      font-weight: 700;
+    }
+    .price {
+      color: var(--accent-2);
+      font-weight: 800;
+      font-size: 16px;
+    }
+    .btn {
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+      color: #042030;
+      border: none;
+      border-radius: 8px;
+      padding: 10px 16px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: transform 0.1s ease;
+    }
+    .btn:hover { transform: scale(1.05); }
+    .note {text-align:center;color:var(--muted);margin-top:20px;font-size:14px;}
+    footer {text-align:center;color:var(--muted);margin-top:30px;font-size:13px;padding-bottom:20px;z-index:2;position:relative;}
+  </style>
+</head>
+<body>
+  <canvas id="snow"></canvas>
+
+  <header>
+    <h1>RANK SHOP</h1>
+    <h2>Glacier Network</h2>
+  </header>
+
+  <div class="container">
+    <div id="ranks"></div>
+    <p class="note">Semua detail fitur rank tersedia di grup WhatsApp. Klik <strong>Beli</strong> untuk memesan.</p>
+  </div>
+
+  <footer>
+    <small>© <span id="year"></span> Glacier Network</small>
+  </footer>
+
+  <script>
+    const RANKS = [
+      {id:'vip', title:'VIP', price:'Rp 10.000'},
+      {id:'vip+', title:'VIP+', price:'Rp 25.000'},
+      {id:'mvp', title:'MVP', price:'Rp 75.000'},
+      {id:'emperor', title:'Emperor', price:'Rp 200.000'}
+    ];
+    const WA_NUMBER = '6285870917264';
+
+    const ranksEl = document.getElementById('ranks');
+    const yearEl = document.getElementById('year');
+    yearEl.textContent = new Date().getFullYear();
+
+    function renderRanks(){
+      ranksEl.innerHTML = '';
+      RANKS.forEach(r => {
+        const div = document.createElement('div');
+        div.className = 'rank-item';
+        div.innerHTML = `
+          <div class="rank-title">${r.title}</div>
+          <div style="display:flex;align-items:center;gap:10px;">
+            <div class="price">${r.price}</div>
+            <button class="btn" onclick="buyRank('${r.title}','${r.price}')">Beli</button>
+          </div>
+        `;
+        ranksEl.appendChild(div);
+      });
+    }
+
+    function buyRank(title, price){
+      const msg = `Halo admin Glacier Network, saya ingin membeli rank ${title} seharga ${price}.`;
+      window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`,'_blank');
+    }
+
+    renderRanks();
+
+    // Snowfall effect
+    const canvas = document.getElementById('snow');
+    const ctx = canvas.getContext('2d');
+    let snowflakes = [];
+
+    function resizeCanvas(){
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    function createSnow(){
+      snowflakes.push({
+        x: Math.random() * canvas.width,
+        y: 0,
+        r: Math.random() * 3 + 1,
+        d: Math.random() + 0.5
+      });
+    }
+
+    function drawSnow(){
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+      ctx.fillStyle = 'rgba(255,255,255,0.8)';
+      ctx.beginPath();
+      for(let i=0;i<snowflakes.length;i++){
+        const f = snowflakes[i];
+        ctx.moveTo(f.x, f.y);
+        ctx.arc(f.x, f.y, f.r, 0, Math.PI*2, true);
+      }
+      ctx.fill();
+      updateSnow();
+    }
+
+    function updateSnow(){
+      for(let i=0;i<snowflakes.length;i++){
+        const f = snowflakes[i];
+        f.y += Math.pow(f.d, 2) + 1;
+        if(f.y > canvas.height){
+          snowflakes[i] = {x: Math.random()*canvas.width, y:0, r:f.r, d:f.d};
+        }
+      }
+    }
+
+    function loopSnow(){
+      createSnow();
+      drawSnow();
+      requestAnimationFrame(loopSnow);
+    }
+    loopSnow();
+  </script>
+</body>
+</html>
