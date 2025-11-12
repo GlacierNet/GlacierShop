@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Glacier Network | Rank Shop</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Montserrat:wght@800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --ice-blue: #a8dadc;
+            --glacier-blue: #457b9d;
+            --deep-blue: #1d3557;
+            --snow: #f1faee;
+            --frost: #e9f5f9;
+            --vip: #4ade80;
+            --vip-plus: #38bdf8;
+            --mvp: #a78bfa;
+            --emperor: #fbbf24;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #0c243d 0%, #1a3a5f 100%);
+            color: var(--snow);
+            overflow-x: hidden;
+            position: relative;
+            min-height: 100vh;
+        }
+
+        .snow {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 100;
+        }
+
+        .snowflake {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            opacity: 0.8;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(100vh);
+            }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        header {
+            padding: 25px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-icon {
+            font-size: 2.2rem;
+            color: var(--ice-blue);
+            text-shadow: 0 0 15px rgba(168, 218, 220, 0.7);
+        }
+
+        .logo-text {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(to right, var(--ice-blue), #fff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: -0.5px;
+        }
+
+        .logo-text span {
+            color: var(--glacier-blue);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        nav a {
+            color: var(--snow);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.05rem;
+            padding: 8px 12px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        nav a:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--ice-blue);
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: var(--ice-blue);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        nav a:hover::after {
+            width: 70%;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 100px 0 80px;
+            position: relative;
+        }
+
+        .hero h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            background: linear-gradient(to right, #e0f7fa, #b3e5fc, #81d4fa);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.4rem;
+            max-width: 700px;
+            margin: 0 auto 40px;
+            color: var(--ice-blue);
+            opacity: 0.9;
+        }
+
+        .highlight {
+            color: var(--ice-blue);
+            font-weight: 700;
+        }
+
+        .btn {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--glacier-blue), var(--deep-blue));
+            color: white;
+            padding: 16px 40px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            text-decoration: none;
+            transition: all 0.4s ease;
+            box-shadow: 0 10px 30px rgba(69, 123, 157, 0.4);
+            border: 2px solid transparent;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(69, 123, 157, 0.6);
+            background: linear-gradient(135deg, var(--ice-blue), #8ac6d7);
+            color: var(--deep-blue);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--ice-blue);
+            margin-left: 15px;
+        }
+
+        .btn-outline:hover {
+            background: rgba(168, 218, 220, 0.15);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.2rem;
+            margin: 70px 0 50px;
+            font-weight: 800;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(to right, var(--glacier-blue), var(--ice-blue));
+            border-radius: 2px;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 80px;
+        }
+
+        .feature-card {
+            background: rgba(25, 45, 70, 0.6);
+            border-radius: 20px;
+            padding: 35px 30px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(168, 218, 220, 0.15);
+            transition: all 0.4s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            background: rgba(30, 55, 90, 0.7);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+            border-color: rgba(168, 218, 220, 0.3);
+        }
+
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--glacier-blue), var(--deep-blue));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 25px;
+            font-size: 2.2rem;
+            color: white;
+            box-shadow: 0 10px 25px rgba(69, 123, 157, 0.4);
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--ice-blue);
+        }
+
+        .feature-card p {
+            color: #c1d5e0;
+            line-height: 1.7;
+        }
+
+        .packages {
+            background: rgba(13, 28, 48, 0.7);
+            border-radius: 25px;
+            padding: 50px 30px;
+            margin: 80px 0;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(106, 190, 220, 0.2);
+        }
+
+        .package-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .package {
+            border-radius: 20px;
+            overflow: hidden;
+            text-align: center;
+            transition: all 0.4s ease;
+            position: relative;
+        }
+
+        .package-header {
+            padding: 25px 20px;
+            font-weight: 800;
+            color: white;
+        }
+
+        .package-name {
+            font-size: 1.6rem;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .package-name i {
+            font-size: 1.2rem;
+        }
+
+        .package-price {
+            font-size: 2.5rem;
+            font-weight: 800;
+        }
+
+        .package-price span {
+            font-size: 1.2rem;
+            opacity: 0.8;
+        }
+
+        .package-body {
+            padding: 30px 25px;
+            background: rgba(20, 35, 60, 0.8);
+        }
+
+        .specs {
+            list-style: none;
+            margin: 25px 0;
+        }
+
+        .specs li {
+            padding: 10px 0;
+            border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .specs li:last-child {
+            border-bottom: none;
+        }
+
+        .spec-label {
+            color: #a0c4e0;
+        }
+
+        .spec-value {
+            font-weight: 600;
+        }
+
+        .package-btn {
+            display: block;
+            width: 90%;
+            margin: 0 auto;
+            padding: 14px;
+            color: white;
+            text-decoration: none;
+            font-weight: 700;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            border: none;
+            font-size: 1.05rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .package-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+        }
+
+        .tier-vip .package-header { background: linear-gradient(135deg, #16a34a, #22c55e); }
+        .tier-vip .spec-value { color: #4ade80; }
+        .tier-vip .package-btn { background: #16a34a; }
+        .tier-vip .package-btn:hover { background: #15803d; }
+
+        .tier-vip-plus .package-header { background: linear-gradient(135deg, #0ea5e9, #38bdf8); }
+        .tier-vip-plus .spec-value { color: #38bdf8; }
+        .tier-vip-plus .package-btn { background: #0ea5e9; }
+        .tier-vip-plus .package-btn:hover { background: #0284c7; }
+
+        .tier-mvp .package-header { background: linear-gradient(135deg, #7e22ce, #a78bfa); }
+        .tier-mvp .spec-value { color: #c084fc; }
+        .tier-mvp .package-btn { background: #7e22ce; }
+        .tier-mvp .package-btn:hover { background: #6b21a8; }
+
+        .tier-emperor {
+            grid-column: 1 / -1;
+            background: rgba(30, 30, 50, 0.9);
+            border: 2px solid #fbbf24;
+            box-shadow: 0 0 25px rgba(251, 191, 36, 0.4);
+            transform: scale(1.02);
+            margin-top: 20px;
+        }
+
+        .tier-emperor .package-header { 
+            background: linear-gradient(135deg, #b45309, #fbbf24); 
+            color: #0f172a;
+        }
+        .tier-emperor .spec-value { color: #fbbf24; }
+        .tier-emperor .package-btn { 
+            background: #b45309; 
+            color: white;
+        }
+        .tier-emperor .package-btn:hover { 
+            background: #92400e; 
+            transform: translateY(-3px) scale(1.02);
+        }
+
+        footer {
+            background: rgba(10, 20, 35, 0.9);
+            padding: 50px 0 30px;
+            border-top: 1px solid rgba(168, 218, 220, 0.1);
+            margin-top: 80px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-col h3 {
+            font-size: 1.4rem;
+            margin-bottom: 25px;
+            color: var(--ice-blue);
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background: var(--ice-blue);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: #b0c8d9;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .footer-links a:hover {
+            color: var(--ice-blue);
+            padding-left: 5px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(168, 218, 220, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--ice-blue);
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: var(--glacier-blue);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            color: #8aa8c0;
+            font-size: 0.95rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .hero p { font-size: 1.1rem; }
+            nav ul { gap: 15px; }
+            .btn-group { flex-direction: column; gap: 15px; }
+            .btn-outline { margin-left: 0; }
+            .tier-emperor { grid-column: auto; transform: none; }
+        }
+    </style>
+</head>
+<body>
+    <div class="snow" id="snow"></div>
+
+    <header class="container">
+        <div class="logo">
+            <i class="fas fa-snowflake logo-icon"></i>
+            <h1 class="logo-text">Glacier<span>Network</span></h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#home">Beranda</a></li>
+                <li><a href="#packages">Rank</a></li>
+                <li><a href="#features">Keunggulan</a></li>
+                <li><a href="#contact">Kontak</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero container" id="home">
+        <h1><span class="highlight">Rank Shop</span> Langsung ke Owner</h1>
+        <p>Pesan rank VIP, VIP+, MVP, Emperor — langsung chat ke owner via WhatsApp.</p>
+        <div class="btn-group">
+            <a href="https://wa.me/6285870917264?text=Halo%20Glacier%20Network,%20saya%20mau%20pesan%20rank." class="btn">
+                <i class="fab fa-whatsapp"></i> Chat Langsung ke Owner
+            </a>
+            <a href="#packages" class="btn btn-outline">Lihat Paket</a>
+        </div>
+    </section>
+
+    <section class="container">
+        <h2 class="section-title">Mengapa Memilih Kami?</h2>
+        <div class="features">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-user-check"></i>
+                </div>
+                <h3>Langsung ke Owner</h3>
+                <p>Tanpa perantara. Anda berkomunikasi langsung dengan owner — transparan & responsif.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-bolt"></i>
+                </div>
+                <h3>Cepat & Instan</h3>
+                <p>Proses hanya 5–30 menit. Tidak perlu password — aman 100%.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h3>Garansi Aktif</h3>
+                <p>Jika rank tidak muncul, kami bantu sampai aktif — tanpa biaya tambahan.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="packages" id="packages">
+        <h2 class="section-title">Tingkatan Rank</h2>
+        <div class="package-grid">
+            <!-- VIP -->
+            <div class="package tier-vip">
+                <div class="package-header">
+                    <div class="package-name"><i class="fas fa-crown"></i> VIP</div>
+                    <div class="package-price">Rp 5.000<span>/akun</span></div>
+                </div>
+                <div class="package-body">
+                    <ul class="specs">
+                        <li><span class="spec-label">Fitur</span> <span class="spec-value">Warna nama, prefix [VIP]</span></li>
+                        <li><span class="spec-label">Proses</span> <span class="spec-value">5–10 menit</span></li>
+                        <li><span class="spec-label">Garansi</span> <span class="spec-value">✓ 3 hari</span></li>
+                    </ul>
+                    <a href="https://wa.me/6285870917264?text=Saya%20mau%20pesan%20rank%20VIP%20(Rp5rb)" class="package-btn">
+                        <i class="fab fa-whatsapp"></i> Pesan VIP
+                    </a>
+                </div>
+            </div>
+
+            <!-- VIP+ -->
+            <div class="package tier-vip-plus">
+                <div class="package-header">
+                    <div class="package-name"><i class="fas fa-crown"></i> VIP+</div>
+                    <div class="package-price">Rp 15.000<span>/akun</span></div>
+                </div>
+                <div class="package-body">
+                    <ul class="specs">
+                        <li><span class="spec-label">Fitur</span> <span class="spec-value">VIP + efek partikel</span></li>
+                        <li><span class="spec-label">Proses</span> <span class="spec-value">10–15 menit</span></li>
+                        <li><span class="spec-label">Garansi</span> <span class="spec-value">✓ 7 hari</span></li>
+                    </ul>
+                    <a href="https://wa.me/6285870917264?text=Saya%20mau%20pesan%20rank%20VIP%2B%20(Rp15rb)" class="package-btn">
+                        <i class="fab fa-whatsapp"></i> Pesan VIP+
+                    </a>
+                </div>
+            </div>
+
+            <!-- MVP -->
+            <div class="package tier-mvp">
+                <div class="package-header">
+                    <div class="package-name"><i class="fas fa-crown"></i> MVP</div>
+                    <div class="package-price">Rp 25.000<span>/akun</span></div>
+                </div>
+                <div class="package-body">
+                    <ul class="specs">
+                        <li><span class="spec-label">Fitur</span> <span class="spec-value">VIP+ + animasi nama</span></li>
+                        <li><span class="spec-label">Proses</span> <span class="spec-value">15–25 menit</span></li>
+                        <li><span class="spec-label">Garansi</span> <span class="spec-value">✓ 14 hari</span></li>
+                    </ul>
+                    <a href="https://wa.me/6285870917264?text=Saya%20mau%20pesan%20rank%20MVP%20(Rp25rb)" class="package-btn">
+                        <i class="fab fa-whatsapp"></i> Pesan MVP
+                    </a>
+                </div>
+            </div>
+
+            <!-- Emperor -->
+            <div class="package tier-emperor">
+                <div class="package-header">
+                    <div class="package-name"><i class="fas fa-crown"></i> Emperor</div>
+                    <div class="package-price">Rp 35.000<span>/akun</span></div>
+                </div>
+                <div class="package-body">
+                    <ul class="specs">
+                        <li><span class="spec-label">Fitur</span> <span class="spec-value">VIP+/MVP+ + tag emas, prioritas</span></li>
+                        <li><span class="spec-label">Proses</span> <span class="spec-value">20–30 menit</span></li>
+                        <li><span class="spec-label">Garansi</span> <span class="spec-value">✓ 30 hari</span></li>
+                    </ul>
+                    <a href="https://wa.me/6285870917264?text=Saya%20mau%20pesan%20rank%20Emperor%20(Rp35rb)%20-%20PREMIUM" class="package-btn">
+                        <i class="fab fa-whatsapp"></i> Pesan Emperor
+                    </a>
+                </div>
+            </div>
+        </div>
+        <p style="text-align: center; margin-top: 25px; color: var(--ice-blue); font-style: italic;">
+            ✦ Klik tombol <strong>Pesan</strong> — langsung buka chat WhatsApp ke <strong>owner Anda</strong>.
+        </p>
+    </section>
+
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="logo">
+                        <i class="fas fa-snowflake logo-icon"></i>
+                        <h2 class="logo-text">Glacier<span>Network</span></h2>
+                    </div>
+                    <p style="color: #a0c4e0; margin: 20px 0; line-height: 1.7;">
+                        Rank Shop langsung ke owner. Cepat, aman, transparan.
+                    </p>
+                    <div class="social-links">
+                        <a href="https://wa.me/6285870917264" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h3>Harga Resmi</h3>
+                    <ul class="footer-links">
+                        <li><a href="#"><i class="fas fa-crown" style="color:#4ade80"></i> VIP — Rp 5.000</a></li>
+                        <li><a href="#"><i class="fas fa-crown" style="color:#38bdf8"></i> VIP+ — Rp 15.000</a></li>
+                        <li><a href="#"><i class="fas fa-crown" style="color:#a78bfa"></i> MVP — Rp 25.000</a></li>
+                        <li><a href="#"><i class="fas fa-crown" style="color:#fbbf24"></i> Emperor — Rp 35.000</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Kontak Langsung</h3>
+                    <ul class="footer-links">
+                        <li>
+                            <a href="https://wa.me/6285870917264">
+                                <i class="fab fa-whatsapp"></i> +62 858-7091-7264
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://wa.me/6285870917264">
+                                <i class="fas fa-comment-dots"></i> Chat Sekarang
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; 2025 Glacier Network. All rights reserved.<br>
+                Rank Shop • Langsung ke Owner • Cepat & Aman
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const snowContainer = document.getElementById('snow');
+            const snowflakeCount = 100;
+            for (let i = 0; i < snowflakeCount; i++) {
+                const flake = document.createElement('div');
+                flake.classList.add('snowflake');
+                flake.style.width = `${Math.random() * 5 + 2}px`;
+                flake.style.height = flake.style.width;
+                flake.style.left = `${Math.random() * 100}vw`;
+                flake.style.animationDuration = `${Math.random() * 10 + 5}s`;
+                flake.style.opacity = Math.random() * 0.5 + 0.3;
+                snowContainer.appendChild(flake);
+            }
+        });
+    </script>
+</body>
+</html>
+
